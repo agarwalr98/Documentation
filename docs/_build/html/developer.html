@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Developer Guide &mdash; Attendance System via Face Recognition  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to Attendance System via Face Recognition’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Attendance System via Face Recognition
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up">Setting Up</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-face-azure-resource">Create a Face Azure resource</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-new-python-application">Create a new python application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#authenticate-the-client">Authenticate the client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-and-train-a-person-group">Create and train a person Group</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-persongroup">Create a PersonGroup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assign-faces-to-persons">Assign faces to persons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#train-persongroup">Train PersonGroup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-on-raspberry-pi">Configuration on raspberry-pi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#identify-a-face">Identify a face</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-the-api-status">Get the API status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-a-test-image">Get a test image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detect-faces-in-an-image">Detect faces in an image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#identify-faces">Identify faces</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Attendance System via Face Recognition</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Developer Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/developer.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developer-guide">
+<h1>Developer Guide<a class="headerlink" href="#developer-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Azure subscription - <a class="reference external" href="https://azure.microsoft.com/free/">create one for free</a></p></li>
+<li><p>Python 3.x</p></li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Install the client library</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ pip install --upgrade azure-cognitiveservices-vision-face
+</pre></div>
+</div>
+<p>Install the following python libraries.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ pip install urllib3
+$ pip install Pillow
+$ pip install msrest
+$ pip install numpy
+$ pip install idna
+$ pip install certifi
+$ pip install chardet
+$ pip install opencv-contrib-python
+$ pip install requests
+$ pip install requests-oauthlib
+$ pip install azure-common
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-up">
+<h2>Setting Up<a class="headerlink" href="#setting-up" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-a-face-azure-resource">
+<h3>Create a Face Azure resource<a class="headerlink" href="#create-a-face-azure-resource" title="Permalink to this headline">¶</a></h3>
+<p>Create a resource for the Face using <a class="reference external" href="https://docs.microsoft.com/en-gb/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Clinux">Microsoft Azure</a>. or</p>
+<ul class="simple">
+<li><p>Get a <a class="reference external" href="https://azure.microsoft.com/en-gb/try/cognitive-services/#decision">trial key</a> valid for seven days for free. After signup, it will be visible in your account.</p></li>
+<li><p>View your resource on the <a class="reference external" href="https://docs.microsoft.com/en-gb/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Clinux">Microsoft Azure</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="create-a-new-python-application">
+<h3>Create a new python application<a class="headerlink" href="#create-a-new-python-application" title="Permalink to this headline">¶</a></h3>
+<p>Creata a new python script, for example - FaceIdentification.py. Then open it in your preferred text editor and import the following libraries.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>import asyncio, io, glob, os, sys, time, uuid, requests, subprocess
+from urllib.parse import urlparse
+import math, datetime, logging
+import cv2
+import requests
+from multiprocessing import Queue, Process
+from io import BytesIO
+from PIL import Image, ImageDraw
+from azure.cognitiveservices.vision.face import FaceClient
+from msrest.authentication import CognitiveServicesCredentials
+from azure.cognitiveservices.vision.face.models import TrainingStatusType, Person, SnapshotObjectType, OperationStatusType
+</pre></div>
+</div>
+<p>Then create variables for Azure’s Endpoint and Key.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">KEY</span> <span class="o">=</span> <span class="s1">&#39;FACE_SUBSCRIPTION_KEY&#39;</span>
+<span class="nv">ENDPOINT</span> <span class="o">=</span> <span class="s1">&#39;FACE_ENDPOINT&#39;</span>
+</pre></div>
+</div>
+<p><em><strong>Note</strong></em> - Key and Endpoint shall be visible in your Azure’s account.</p>
+<!-- ~~~~ --></div>
+</div>
+<div class="section" id="authenticate-the-client">
+<h2>Authenticate the client<a class="headerlink" href="#authenticate-the-client" title="Permalink to this headline">¶</a></h2>
+<p>Use Key and Endpoint to initiate a client. Create a <a class="reference external" href="https://docs.microsoft.com/python/api/msrest/msrest.authentication.cognitiveservicescredentials?view=azure-python">CognitiveServicesCredentials</a> object with the help of key, and use it with your endpoint to create a <a class="reference external" href="https://docs.microsoft.com/en-gb/python/api/azure-cognitiveservices-vision-face/azure.cognitiveservices.vision.face.faceclient?view=azure-python">FaceClient</a> object.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">face_client</span> <span class="o">=</span> FaceClient<span class="o">(</span>ENDPOINT, CognitiveServicesCredentials<span class="o">(</span>KEY<span class="o">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-and-train-a-person-group">
+<h2>Create and train a person Group<a class="headerlink" href="#create-and-train-a-person-group" title="Permalink to this headline">¶</a></h2>
+<p>The following code creates a <strong>personGroup</strong> common to all the students with different <strong>Person</strong> objects. It associates each Person with a set of example images, and then it trains to be able to recognize each person.
+<em><strong>Note</strong></em> - Student’s Data is taken from a directory with name ‘Dataset’. It contains folders with the name as rollnumber of each student. Each folder contains three images to a corresponding student.</p>
+<div class="section" id="create-a-persongroup">
+<h3>Create a PersonGroup<a class="headerlink" href="#create-a-persongroup" title="Permalink to this headline">¶</a></h3>
+<p>To step through this scenario, you need to save the training images to the root directory with a proper name.
+This group of images contains three sets of face images corresponding to various people. The code will define the <strong>Person</strong> objects equal to the number of folders in a directory and associate them with the image files in corresponding folder.</p>
+<p>Define a lable for the <strong>PersonGroup</strong> object that we will create.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># SOURCE_PERSON_GROUP_ID should be all lowercase and alphanumeric. For example, &#39;mygroupname&#39; (dashes are OK).</span>
+<span class="nv">PERSON_GROUP_ID</span> <span class="o">=</span> <span class="s1">&#39;Your-Person-Group&#39;</span>
+<span class="c1"># Used for the Snapshot and Delete Person Group examples.</span>
+<span class="nv">TARGET_PERSON_GROUP_ID</span> <span class="o">=</span> str<span class="o">(</span>uuid.uuid4<span class="o">())</span> <span class="c1"># assign a random ID (or name it anything)</span>
+</pre></div>
+</div>
+<p><strong>Note</strong> - You can also use list_person_groups to list all preexisting <strong>PersonGroups</strong></p>
+<p>Add the following code to the bottom of your script. It will create a <strong>PersonGroup</strong> with the above defined labels.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>face_client.person_group.create<span class="o">(</span><span class="nv">person_group_id</span><span class="o">=</span>PERSON_GROUP_ID, <span class="nv">name</span><span class="o">=</span>PERSON_GROUP_ID<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="assign-faces-to-persons">
+<h3>Assign faces to persons<a class="headerlink" href="#assign-faces-to-persons" title="Permalink to this headline">¶</a></h3>
+<p>The following code will create <strong>Person</strong> objects and assign the faces to each <strong>Person</strong> object.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> student_name in os.listdir<span class="o">(</span><span class="s1">&#39;./Dataset&#39;</span><span class="o">)</span>:
+    <span class="c1"># Define a student friend </span>
+    <span class="nv">student</span> <span class="o">=</span> face_client.person_group_person.create<span class="o">(</span>PERSON_GROUP_ID, student_name<span class="o">)</span>
+    <span class="c1"># Add studentName and corresponding personId i diction</span>
+    diction.add<span class="o">(</span>student.person_id ,student_name<span class="o">)</span>
+    <span class="nv">path</span> <span class="o">=</span> <span class="s1">&#39;./Dataset&#39;</span> + <span class="s1">&#39;/&#39;</span> + student_name
+    <span class="nv">student_images</span> <span class="o">=</span> student_name + <span class="s2">&quot;_images&quot;</span>
+    <span class="c1"># Take all images of a student in one tensor</span>
+    <span class="nv">student_images</span> <span class="o">=</span> <span class="o">[</span>file <span class="k">for</span> file in os.listdir<span class="o">(</span>path<span class="o">)]</span>
+    print<span class="o">(</span>student_images<span class="o">)</span>
+    <span class="k">for</span> image in student_images:
+        <span class="nv">image_path</span> <span class="o">=</span> path + <span class="s1">&#39;/&#39;</span> + image
+        <span class="nv">w</span> <span class="o">=</span> open<span class="o">(</span>image_path, <span class="s1">&#39;r+b&#39;</span><span class="o">)</span>
+        try:
+            <span class="c1"># Add face to corresponding student</span>
+            face_client.person_group_person.add_face_from_stream<span class="o">(</span>PERSON_GROUP_ID, student.person_id, w<span class="o">)</span>
+        except:
+            print<span class="o">(</span><span class="s2">&quot;NO face is detected &quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="train-persongroup">
+<h3>Train PersonGroup<a class="headerlink" href="#train-persongroup" title="Permalink to this headline">¶</a></h3>
+<p>Once you’ve assigned faces, you must train the <strong>PersonGroup</strong> so that it can identify the visual features associated with each of its Person objects. The following code calls the asynchronous <strong>train</strong> method and polls the result, printing the status to the console.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;&#39;&#39; </span>
+<span class="s1">Train PersonGroup</span>
+<span class="s1">&#39;&#39;&#39;</span>
+print<span class="o">(</span><span class="s1">&#39;Training the person group...&#39;</span><span class="o">)</span>
+<span class="c1"># Train the person group</span>
+face_client.person_group.train<span class="o">(</span>PERSON_GROUP_ID<span class="o">)</span>
+<span class="k">while</span> <span class="o">(</span>True<span class="o">)</span>:
+    <span class="nv">training_status</span> <span class="o">=</span> face_client.person_group.get_training_status<span class="o">(</span>PERSON_GROUP_ID<span class="o">)</span>
+    print<span class="o">(</span><span class="s2">&quot;Training status: {}.&quot;</span>.format<span class="o">(</span>training_status.status<span class="o">))</span>
+    print<span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span>training_status.status is TrainingStatusType.succeeded<span class="o">)</span>:
+        <span class="nb">break</span>
+    <span class="k">elif</span> <span class="o">(</span>training_status.status is TrainingStatusType.failed<span class="o">)</span>:
+        sys.exit<span class="o">(</span><span class="s1">&#39;Training the person group has failed.&#39;</span><span class="o">)</span>
+    time.sleep<span class="o">(</span><span class="m">5</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="configuration-on-raspberry-pi">
+<h2>Configuration on raspberry-pi<a class="headerlink" href="#configuration-on-raspberry-pi" title="Permalink to this headline">¶</a></h2>
+<p>Installed the Raspbian OS on raspberry-pi.
+<a class="reference external" href="https://thepi.io/how-to-install-raspbian-on-the-raspberry-pi/">Click here</a> for installation instructions.<br>
+Create the variables which will be used later.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1">#Time in seconds to wait between successive requests to the server.</span>
+<span class="nv">FETCH_INTERVAL</span> <span class="o">=</span> <span class="m">60</span>
+<span class="c1"># Time in seconds to wait before checking for the next scheduled class.</span>
+<span class="nv">SLEEP_INTERVAL</span> <span class="o">=</span> <span class="m">2400</span>
+<span class="c1"># # Time before the scheduled time from which the system should start</span>
+<span class="c1"># the attendance process.</span>
+<span class="nv">CLASSTIME_LEFT_MARGIN</span> <span class="o">=</span> <span class="o">{</span><span class="s1">&#39;hour&#39;</span>:0, <span class="s1">&#39;minute&#39;</span>:10, <span class="s1">&#39;second&#39;</span>:0<span class="o">}</span>
+<span class="c1"># Time after the scheduled time upto which the system should continue</span>
+<span class="c1"># the attendance process</span>
+<span class="nv">CLASSTIME_RIGHT_MARGIN</span> <span class="o">=</span> <span class="o">{</span><span class="s1">&#39;hour&#39;</span>:0, <span class="s1">&#39;minute&#39;</span>:10, <span class="s1">&#39;second&#39;</span>:0<span class="o">}</span>
+<span class="c1"># Time in seconds between successive captures of images while the attendance process is running.</span>
+<span class="nv">IMAGE_CAPTURE_RATE</span> <span class="o">=</span> <span class="m">3</span>
+<span class="c1"># API Endpoint to get the schedule using GET request.</span>
+<span class="nv">API_GET_SCHEDULE</span> <span class="o">=</span> <span class="s1">&#39;http://10.8.10.247:8000/api/lecture/&#39;</span>
+<span class="c1"># API Endpoint to submit the identified students&#39; information using POST request.</span>
+<span class="nv">API_POST_ATTENDANCE</span> <span class="o">=</span> <span class="s1">&#39;http://10.8.10.247:8000/api/lecture/s&#39;</span>
+<span class="c1"># Format in which the time is sent from the server</span>
+<span class="nv">FETCH_TIME_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;%Y-%m-%dT%H:%M:%S+05:30&#39;</span>
+<span class="c1"># Endpoint of Microsoft Azure Face API</span>
+<span class="nv">ENDPOINT</span> <span class="o">=</span> <span class="s1">&#39;https://westcentralus.api.cognitive.microsoft.com/&#39;</span>
+<span class="c1"># Keys of Microsoft Azure Face API</span>
+<span class="nv">KEY</span> <span class="o">=</span> <span class="s1">&#39;abddb967436d4acea1a3fd149d3ad3d1&#39;</span>
+<span class="nv">PERSON_GROUP_ID</span> <span class="o">=</span> <span class="s1">&#39;Your-Person_Group&#39;</span>
+<span class="c1"># Threshold value of confidence for which a student&#39;s attendance be marked </span>
+<span class="nv">THRESHOLD</span> <span class="o">=</span> <span class="m">0</span>.6
+</pre></div>
+</div>
+<p>Run updateConfig.py to change the above variables incase some variables gets modified on the server.</p>
+</div>
+<div class="section" id="identify-a-face">
+<h2>Identify a face<a class="headerlink" href="#identify-a-face" title="Permalink to this headline">¶</a></h2>
+<p>The following code takes an image with multiple faces and looks to find the identity of each person in the image. It compares each detected face to a PersonGroup, a database of different Person objects whose facial features are known.</p>
+<div class="section" id="get-the-api-status">
+<h3>Get the API status<a class="headerlink" href="#get-the-api-status" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">training_status</span> <span class="o">=</span> face_client.person_group.get_training_status<span class="o">(</span>PERSON_GROUP_ID<span class="o">)</span>
+print<span class="o">(</span><span class="s2">&quot;Training status: {}.&quot;</span>.format<span class="o">(</span>training_status.status<span class="o">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-a-test-image">
+<h3>Get a test image<a class="headerlink" href="#get-a-test-image" title="Permalink to this headline">¶</a></h3>
+<p>The following code looks in the root of your project for an image test-image-example.jpg and detects the faces in the image.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">Identify a face against a defined PersonGroup</span>
+<span class="s1">&#39;&#39;&#39;</span>
+<span class="c1"># Reference image for testing against</span>
+<span class="nv">group_photo</span> <span class="o">=</span> <span class="s1">&#39;test-image-example.jpg&#39;</span>
+<span class="nv">IMAGES_FOLDER</span> <span class="o">=</span> os.path.join<span class="o">(</span>os.path.dirname<span class="o">(</span>os.path.realpath<span class="o">(</span>__file__<span class="o">)))</span>
+
+<span class="c1"># Get test image</span>
+<span class="nv">test_image_array</span> <span class="o">=</span> glob.glob<span class="o">(</span>os.path.join<span class="o">(</span>IMAGES_FOLDER, group_photo<span class="o">))</span>
+<span class="nv">image</span> <span class="o">=</span> open<span class="o">(</span>test_image_array<span class="o">[</span><span class="m">0</span><span class="o">]</span>, <span class="s1">&#39;r+b&#39;</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="detect-faces-in-an-image">
+<h3>Detect faces in an image<a class="headerlink" href="#detect-faces-in-an-image" title="Permalink to this headline">¶</a></h3>
+<p>Faces will be detected and features will be stored in an array.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Detect faces</span>
+<span class="nv">face_ids</span> <span class="o">=</span> <span class="o">[]</span>
+<span class="nv">faces</span> <span class="o">=</span> face_client.face.detect_with_stream<span class="o">(</span>image<span class="o">)</span>
+print<span class="o">(</span>faces<span class="o">)</span>
+<span class="k">for</span> face in faces:
+    face_ids.append<span class="o">(</span>face.face_id<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="identify-faces">
+<h3>Identify faces<a class="headerlink" href="#identify-faces" title="Permalink to this headline">¶</a></h3>
+<p>The identify method takes an array of detected faces and compares them to a PersonGroup. If it can match a detected face to a Person, it saves the result. This code prints detailed match results to the console.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify faces</span>
+<span class="nv">results</span> <span class="o">=</span> face_client.face.identify<span class="o">(</span>face_ids, PERSON_GROUP_ID<span class="o">)</span>
+print<span class="o">(</span><span class="s1">&#39;Identifying faces in {}&#39;</span><span class="o">)</span>
+<span class="k">if</span> not results:
+    print<span class="o">(</span><span class="s1">&#39;No person identified in the person group for faces from the {}.&#39;</span>.format<span class="o">(</span>os.path.basename<span class="o">(</span>image.name<span class="o">)))</span>
+<span class="k">for</span> person in results:
+	<span class="k">if</span> person.candidates !<span class="o">=</span> <span class="o">[]</span>:
+	    print<span class="o">(</span><span class="s1">&#39;Person for face ID {} is identified in {} with a confidence of {}.&#39;</span>.format<span class="o">(</span>person.face_id, os.path.basename<span class="o">(</span>image.name<span class="o">)</span>, person.candidates<span class="o">[</span><span class="m">0</span><span class="o">]</span>.confidence<span class="o">))</span> <span class="c1"># Get topmost confidence score</span>
+	    <span class="c1"># print(diction[person.candidates[0].person_id])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Attendance System via Face Recognition’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Rohit Agarwal
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
